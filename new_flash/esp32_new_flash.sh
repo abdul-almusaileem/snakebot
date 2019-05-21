@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# reseting the flash memoory
+#
+esptool.py --chip esp32 -p /dev/tty.SLAB_USBtoUART erase_flash
+
+# writing the frimware to address 0x1000
+#
+esptool.py --chip esp32 -p /dev/tty.SLAB_USBtoUART --baud 460800 write_flash -z 0x1000 esp32-ppp-fix.bin
