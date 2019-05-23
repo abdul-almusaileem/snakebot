@@ -4,6 +4,11 @@
 import machine
 from time import sleep
 
+
+#
+#
+DELAY = 0.4
+
 #
 #
 SERVOS = []
@@ -25,8 +30,7 @@ SERVO_3 = machine.PWM(PIN_3, freq=50)
 #
 #
 def main():
-        move()
-
+    pass
 
 # a function to initiate the servo connectoins
 # and append them to seroves list
@@ -39,17 +43,13 @@ def init():
         SERVOS.append(servo)
 
 
-    straight()
+    idle()
 
 
 #
 #
 def move():
-    # move the
-    #
-    #while True:
-        # the plus 20 is for the caliprating the head
-        #
+
     SERVOS[0].duty(96)
     SERVOS[1].duty(96)
     SERVOS[2].duty(77)
@@ -59,54 +59,57 @@ def move():
 #
 def move2():
     SERVOS[0].duty(50)
-    sleep(0.4)
+    sleep(DELAY)
 
-    SERVOS[1].duty(60)
-    sleep(0.4)
+    SERVOS[1].duty(55)
+    sleep(DELAY)
 
-    SERVOS[2].duty(40)
-    sleep(0.4)
+    SERVOS[2].duty(120)
+    sleep(DELAY)
 
 
 
 #
 #
 def move3():
-    SERVOS[0].duty(160)
-    sleep(0.4)
+    SERVOS[0].duty(120)
+    sleep(DELAY)
 
-    SERVOS[1].duty(77)
-    sleep(0.4)
+    SERVOS[1].duty(55)
+    sleep(DELAY)
 
-    SERVOS[2].duty(120)
-    sleep(0.4)
+    SERVOS[2].duty(40)
+    sleep(DELAY)
 
 
 
 # this function sets each servo to it's straight value
 #
-def straight():
-    SERVOS[0].duty(77+20)
-    #sleep(0.5)
+def idle():
+    SERVOS[0].duty(77+15)
+    sleep(DELAY)
     SERVOS[1].duty(60)
-    #sleep(0.5)
+    sleep(DELAY)
     SERVOS[2].duty(77)
+    sleep(DELAY)
+
 
 
 #
 #
+# if the middle part is lifted it turnes right,
 def test_motion():
 
     try:
         while True:
             move2()
-            #sleep(2)
+            sleep(DELAY)
             move3()
-            #sleep(2)
+            sleep(DELAY)
 
-    except KeyboardInterrupt as err:
+    except KeyboardInterrupt:
         print("Force stoped, going to Straight posision...")
-        straight()
+        idle()
 
 
 
