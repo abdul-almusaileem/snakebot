@@ -10,6 +10,18 @@ SERVOS = []
 PINS = [18, 5, 17]
 
 
+"""
+PIN_1 = machine.Pin(18)
+PIN_2 = machine.Pin(5)
+PIN_3 = machine.Pin(17)
+
+# create
+#
+SERVO_1 = machine.PWM(PIN_1, freq=50)
+SERVO_2 = machine.PWM(PIN_2, freq=50)
+SERVO_3 = machine.PWM(PIN_3, freq=50)
+"""
+
 #
 #
 def main():
@@ -23,14 +35,15 @@ def main():
 def init():
     for pin in PINS:
         m_pin = machine.Pin(pin)
-        servo = machine.PWM(m_pin, feq=50)
+        servo = machine.PWM(m_pin, freq=50)
         SERVOS.append(servo)
 
 
     straight()
 
 
-
+#
+#
 def move():
     # move the
     #
@@ -40,38 +53,60 @@ def move():
     SERVOS[0].duty(96)
     SERVOS[1].duty(96)
     SERVOS[2].duty(77)
-    sleep(1)
-
-        #straigh()
 
 
-
-        #straigh()
-
+#
+#
 def move2():
     SERVOS[0].duty(50)
-    SERVOS[1].duty(40)
+    sleep(0.4)
+
+    SERVOS[1].duty(60)
+    sleep(0.4)
+
     SERVOS[2].duty(40)
-    sleep(1)
+    sleep(0.4)
 
 
 
+#
+#
 def move3():
     SERVOS[0].duty(160)
-    SERVOS[1].duty(70)
+    sleep(0.4)
+
+    SERVOS[1].duty(77)
+    sleep(0.4)
+
     SERVOS[2].duty(120)
-    sleep(1)
+    sleep(0.4)
 
 
+
+# this function sets each servo to it's straight value
+#
 def straight():
     SERVOS[0].duty(77+20)
+    #sleep(0.5)
     SERVOS[1].duty(60)
+    #sleep(0.5)
     SERVOS[2].duty(77)
-    sleep(1)
 
 
+#
+#
+def test_motion():
 
+    try:
+        while True:
+            move2()
+            #sleep(2)
+            move3()
+            #sleep(2)
 
+    except KeyboardInterrupt as err:
+        print("Force stoped, going to Straight posision...")
+        straight()
 
 
 
