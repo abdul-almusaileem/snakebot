@@ -1,0 +1,6 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "editor.fontSize": 10,
+    "workbench.colorTheme": "Xcode Partial (Dark)"
+}
